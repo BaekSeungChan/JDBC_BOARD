@@ -52,4 +52,14 @@ CallableStatement cstmt = conn.prepareCall(sql);
 
 
 
+트랜잭션
+- 기능 처리의 최소 단위. 하나의 기능은 여러 소작업들로 구성
+- 트랜잭션은 소작업들이 모두 성공하거나 실패해야 함
+- 커밋은 내부 작업을 모두 성공 처리하고, 롤백은 실행 전으로 돌아간다는 의미에서 모두 실패 처리
+- JDBC에서 트랜잭션을 제어 시 Connection의 setAutoCommit() 메소드로 자동 커밋을 꺼야 함
+```java
+conn.setAutoCommit(false);
+```
+
+
 
