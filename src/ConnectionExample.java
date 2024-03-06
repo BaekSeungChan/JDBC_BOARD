@@ -16,22 +16,27 @@ public class ConnectionExample {
             );
 
             System.out.println("연결 성공");
-            //Statement stmt = conn.createStatement(); // 정적인 SQL 쿼리문 실행 고정된거를 사용할 때 values도 하드코딩으로 넣는다.
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO users (userid, username, userpassword, userage, useremail) VALUES (?,?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("update users set username=?, userpassword=?, userage=? where userid=?");
             Scanner scanner = new Scanner(System.in);
             while(true) {
-                System.out.print("아이디 입력 : ");
+                System.out.print("변경 자료를 찾기 위한 아이디 입력 : ");
                 String userid = scanner.nextLine();
                 if (userid.equals("q")) break;
 
-                //입력 값을 설정 한다
-                pstmt.setString(1, userid);
-                pstmt.setString(2, "홍길동");
-                pstmt.setString(3, "1004");
-                pstmt.setInt(4, 20);
-                pstmt.setString(5, "hong1@naver.com");
+                System.out.print("이름 : ");
+                String username = scanner.nextLine();
+                System.out.print("비밀번호 : ");
+                String userpassword = scanner.nextLine();
+                System.out.print("나이 : ");
+                int userage = scanner.nextInt();
+                //enter key를 입력 받아 버리기 위함
+                scanner.nextLine();
 
-                System.out.println("입력된 아이디 : " + userid);
+                //입력 값을 설정 한다
+                pstmt.setString(1, username);
+                pstmt.setString(2, userpassword);
+                pstmt.setInt(3, userage);
+                pstmt.setString(4, userid);
 
                 int updated = pstmt.executeUpdate();
                 //변경된 건 수
