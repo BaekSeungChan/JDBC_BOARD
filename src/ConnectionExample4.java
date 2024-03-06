@@ -45,7 +45,9 @@ public class ConnectionExample4 {
                     //찾고자 하는 자료가 없음
                     System.out.println("userid : [" + userid + "] 에 대한 자료가 존재하지않습니다 ");
                 }
+                rs.close();
             }
+            pstmt.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
